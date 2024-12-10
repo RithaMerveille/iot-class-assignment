@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Middle Trader Expense Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 400px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, button {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .output span {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Expense Tracker</h1>
+    <form id="expense-form">
+      <input type="text" id="expense-item" placeholder="Expense Description (e.g., Transport)">
+      <input type="number" id="expense-amount" placeholder="Expense Amount">
+      <input type="number" id="sales-amount" placeholder="Sales Amount">
+      <button type="button" onclick="calculateProfit()">Calculate Profit</button>
+    </form>
+    <div class="output" id="output">
+      <p>Total Expenses: <span id="total-expenses">0</span> RWF</p>
+      <p>Total Sales: <span id="total-sales">0</span> RWF</p>
+      <p>Net Profit: <span id="net-profit">0</span> RWF</p>
+    </div>
+  </div>
+
+  <script>
+    let totalExpenses = 0;
+    let totalSales = 0;
+
+    function calculateProfit() {
+      const expenseAmount = parseFloat(document.getElementById('expense-amount').value) || 0;
+      const salesAmount = parseFloat(document.getElementById('sales-amount').value) || 0;
+
+      // Update totals
+      totalExpenses += expenseAmount;
+      totalSales += salesAmount;
+
+      // Calculate profit
+      const netProfit = totalSales - totalExpenses;
+
+      // Update the UI
+      document.getElementById('total-expenses').textContent = totalExpenses.toFixed(2);
+      document.getElementById('total-sales').textContent = totalSales.toFixed(2);
+      document.getElementById('net-profit').textContent = netProfit.toFixed(2);
+
+      // Clear input fields
+      document.getElementById('expense-item').value = '';
+      document.getElementById('expense-amount').value = '';
+      document.getElementById('sales-amount').value = '';
+    }
+  </script>
+</body>
+</html>
+
